@@ -11,6 +11,10 @@ use parry::bounding_volume::BoundingVolume;
 use parry::utils::hashmap::HashMap;
 
 use crate::data::{BundleSet, ComponentSet, ComponentSetMut};
+use crate::geometry::{
+    SharedShape,
+};
+use serde_json;
 
 /// A broad-phase combining a Hierarchical Grid and Sweep-and-Prune.
 ///
@@ -349,10 +353,18 @@ impl BroadPhase {
     ) -> bool {
         let (co_pos, co_shape, co_changes) = collider;
 
+        println!("co_pos={:?}", co_pos);
+
         let mut aabb = co_shape
             .compute_aabb(co_pos)
             .loosened(prediction_distance / 2.0);
 
+        //let shape = match co_shape {
+        //     SharedShape::Cuboid(size) =>
+        //         "cuboid"
+        // };
+        let shape = serde_json::to_string(&co_shape.0.as_typed_shape());
+        println!("co_shape={:?}, co_pos={:?}, aabb={:?}", shape, co_pos, aabb);
         aabb.mins = super::clamp_point(aabb.mins);
         aabb.maxs = super::clamp_point(aabb.maxs);
         let prev_aabb;

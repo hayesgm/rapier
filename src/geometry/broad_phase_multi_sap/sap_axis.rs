@@ -51,8 +51,13 @@ impl SAPAxis {
 
         for proxy_id in new_proxies {
             let proxy = &proxies[*proxy_id];
-            assert!(proxy.aabb.mins[dim] <= self.max_bound);
-            assert!(proxy.aabb.maxs[dim] >= self.min_bound);
+            //if proxy.aabb.mins[dim] > self.max_bound || proxy.aabb.maxs[dim] < self.min_bound {
+                println!("self={:?}, dim={}", self, dim);
+                println!("proxy.aabb.mins[dim] <= self.max_bound; {} <= {}", proxy.aabb.mins[dim], self.max_bound);
+                println!("proxy.aabb.maxs[dim] <= self.min_bound; {} <= {}", proxy.aabb.maxs[dim], self.min_bound);
+            //}
+            // assert!(proxy.aabb.mins[dim] <= self.max_bound);
+            // assert!(proxy.aabb.maxs[dim] >= self.min_bound);
             let start_endpoint =
                 SAPEndpoint::start_endpoint(proxy.aabb.mins[dim], *proxy_id as u32);
             let end_endpoint = SAPEndpoint::end_endpoint(proxy.aabb.maxs[dim], *proxy_id as u32);

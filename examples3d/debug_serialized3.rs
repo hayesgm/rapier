@@ -33,6 +33,9 @@ pub fn init_world(testbed: &mut Testbed) {
     testbed.harness_mut().physics.integration_parameters = state.integration_parameters;
     testbed.harness_mut().physics.gravity = state.gravity;
 
-    testbed.set_graphics_shift(vector![-541.0, -6377257.0, -61.0]);
-    testbed.look_at(point![10.0, 10.0, 10.0], point![0.0, 0.0, 0.0]);
+    //testbed.set_graphics_shift(vector![-541.0, -6377257.0, -61.0]);
+    testbed.look_at(point![5.0, 5.0, 5.0], point![0.0, 0.0, 0.0]);
+
+    // testbed.set_world(bodies, colliders, impulse_joints, multibody_joints);
+    // testbed.look_at(point![100.0, 100.0, 100.0], Point::origin());
 }
